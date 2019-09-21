@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MobileLab</string>
+    <string name="login">Already a member? <u><b>Login</b></u></string>
+    <string name="signup">No account yet? <u><b>Create one</b></u></string>
+</resources>
