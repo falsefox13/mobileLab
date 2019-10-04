@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.Objects;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout emailField;
     private TextInputLayout nameField;
     private TextInputLayout phoneField;
@@ -26,9 +26,8 @@ public class SignupActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         initFields();
-        setHints();
 
-        findViewById(R.id.btn_signup).setOnClickListener(v -> {
+        findViewById(R.id.btn_sign_up).setOnClickListener(v -> {
             final String email = Objects.requireNonNull(emailField.getEditText()).getText().toString();
             final String name = Objects.requireNonNull(nameField.getEditText()).getText().toString();
             final String phone = Objects.requireNonNull(phoneField.getEditText()).getText().toString();
@@ -40,8 +39,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signUp(final String email, final String name, final String phone, final String pass) {
-        if (!validate(email, name, phone, pass))
+        if (!validate(email, name, phone, pass)) {
             return;
+        }
 
         auth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, task -> {
@@ -69,8 +69,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private void onCreateError() {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Sign up failed");
-        alertDialog.setMessage("This email or phone are already registered, please try another");
+        alertDialog.setTitle(R.string.sign_up_failed);
+        alertDialog.setMessage(getString(R.string.sign_up_explanation));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 (dialog, which) -> dialog.dismiss());
         alertDialog.show();
@@ -88,38 +88,31 @@ public class SignupActivity extends AppCompatActivity {
         passField = findViewById(R.id.pass_wrapper);
     }
 
-    private void setHints() {
-        emailField.setHint("Email");
-        nameField.setHint("Name");
-        phoneField.setHint("Phone");
-        passField.setHint("Password");
-    }
-
     public boolean validate(final String email, final String name, final String phone, final String password) {
         boolean valid = true;
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Enter a valid email");
+            emailField.setError(getString(R.string.email_error));
             valid = false;
         } else {
             emailField.setError(null);
         }
 
         if (phone.isEmpty() || !android.util.Patterns.PHONE.matcher(phone).matches()) {
-            phoneField.setError("Enter a valid phone");
+            phoneField.setError(getString(R.string.phone_error));
             valid = false;
         } else {
             phoneField.setError(null);
         }
 
         if (!name.matches("^[A-Za-z]+$")) {
-            nameField.setError("Enter a real name, please");
+            nameField.setError(getString(R.string.name_error));
             valid = false;
         } else {
             nameField.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 8) {
-            passField.setError("At least 8 characters");
+            passField.setError(getString(R.string.password_error));
             valid = false;
         } else {
             passField.setError(null);

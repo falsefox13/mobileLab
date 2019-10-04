@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        findViewById(R.id.btn_signout).setOnClickListener(v -> {
+        findViewById(R.id.btn_sign_out).setOnClickListener(v -> {
             auth.signOut();
             startActivity(new Intent(this, LoginActivity.class));
         });

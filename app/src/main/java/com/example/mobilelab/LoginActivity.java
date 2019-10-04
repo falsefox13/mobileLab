@@ -26,9 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         emailField = findViewById(R.id.email_wrapper);
-        emailField.setHint("Email");
         passField = findViewById(R.id.pass_wrapper);
-        passField.setHint("Password");
 
         findViewById(R.id.btn_login).setOnClickListener(v -> {
             final String email = Objects.requireNonNull(emailField.getEditText()).getText().toString();
@@ -36,21 +34,24 @@ public class LoginActivity extends AppCompatActivity {
             signIn(email, pass);
         });
 
-        findViewById(R.id.link_signup).setOnClickListener(v -> {
-            startActivity(new Intent(this, SignupActivity.class));
+        findViewById(R.id.link_sign_up).setOnClickListener(v -> {
+            startActivity(new Intent(this, SignUpActivity.class));
         });
     }
 
     private void signIn(final String email, final String pass) {
-        if (!validate(email, pass))
+        if (!validate(email, pass)) {
             return;
+        }
 
         auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful())
+                    if (task.isSuccessful()) {
                         onSignInSuccess();
-                    else
+                    }
+                    else {
                         onSignInError();
+                    }
                 });
     }
 
@@ -60,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onSignInError() {
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Authentication failed");
-        alertDialog.setMessage("Please check your email and password");
+        alertDialog.setTitle(R.string.auth_failed);
+        alertDialog.setMessage(getString(R.string.check));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 (dialog, which) -> dialog.dismiss());
         alertDialog.show();
@@ -76,14 +77,14 @@ public class LoginActivity extends AppCompatActivity {
         boolean valid = true;
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Enter a valid email");
+            emailField.setError(getString(R.string.email_error));
             valid = false;
         } else {
             emailField.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 8) {
-            passField.setError("At least 8 characters");
+            passField.setError(getString(R.string.password_error));
             valid = false;
         } else {
             passField.setError(null);
