@@ -90,32 +90,32 @@ public class SignUpActivity extends AppCompatActivity {
 
     public boolean validate(final String email, final String name, final String phone, final String password) {
         boolean valid = true;
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (Utils.validateEmail(email)) {
+            emailField.setError(null);
+        } else {
             emailField.setError(getString(R.string.email_error));
             valid = false;
-        } else {
-            emailField.setError(null);
         }
 
-        if (phone.isEmpty() || !android.util.Patterns.PHONE.matcher(phone).matches()) {
-            phoneField.setError(getString(R.string.phone_error));
-            valid = false;
+        if (Utils.validatePassword(password)) {
+            passField.setError(null);
         } else {
-            phoneField.setError(null);
-        }
-
-        if (!name.matches("^[A-Za-z]+$")) {
-            nameField.setError(getString(R.string.name_error));
-            valid = false;
-        } else {
-            nameField.setError(null);
-        }
-
-        if (password.isEmpty() || password.length() < 8) {
             passField.setError(getString(R.string.password_error));
             valid = false;
+        }
+
+        if (Utils.validatePhone(phone)) {
+            phoneField.setError(null);
         } else {
-            passField.setError(null);
+            phoneField.setError(getString(R.string.phone_error));
+            valid = false;
+        }
+
+        if (Utils.validateName(name)) {
+            nameField.setError(null);
+        } else {
+            nameField.setError(getString(R.string.name_error));
+            valid = false;
         }
 
         return valid;
