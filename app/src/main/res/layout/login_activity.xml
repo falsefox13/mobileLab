@@ -27,8 +27,8 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/fox"
-                android:contentDescription="@string/fox" />
+                android:src="@drawable/logo"
+                android:contentDescription="@string/logo" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email_wrapper"
