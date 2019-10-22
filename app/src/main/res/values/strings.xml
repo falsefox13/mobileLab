@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MobileLab</string>
+    <string name="login_text">Already a member? <u><b>Login</b></u></string>
+    <string name="signUp">No account yet? <u><b>Create one</b></u></string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="fox">Fox</string>
+    <string name="create_account">Create Account</string>
+    <string name="welcome">Welcome!</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="check">Please check your email and password</string>
+    <string name="email_error">Enter a valid email</string>
+    <string name="password_error">At least 8 characters</string>
+    <string name="phone_error">Enter a valid phone</string>
+    <string name="name_error">Enter a real name, please</string>
+    <string name="sign_up_failed">Sign up failed</string>
+    <string name="sign_up_explanation">This email or phone are already registered, please try another</string>
+</resources>
