@@ -14,13 +14,13 @@ import android.widget.RelativeLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,16 +28,15 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout main;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private SwipeRefreshLayout pullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initFields();
+        initOnRefresh();
         registerNetworkMonitoring();
         connectAndGetApiData();
-        setOnRefresh();
     }
 
     public void connectAndGetApiData() {
@@ -48,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Good>> call, Response<List<Good>> response) {
                 progressBar.setVisibility(View.INVISIBLE);
-                if (response.isSuccessful()) {
+                GoodsAdapter adapter = (GoodsAdapter) recyclerView.getAdapter();
+                if (response.isSuccessful() && adapter != null) {
                     List<Good> dataArrayList = response.body();
-                    recyclerView.setAdapter(new GoodsAdapter(dataArrayList, R.layout.list_item_good, getApplicationContext()));
+                    adapter.updateGoods(dataArrayList);
                 }
             }
 
@@ -62,24 +62,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void initFields() {
-        pullToRefresh = findViewById(R.id.pullToRefresh);
+    private void initFields() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(this, VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
+        recyclerView.setAdapter(new GoodsAdapter(new ArrayList<>(), R.layout.list_item_good));
         main = findViewById(R.id.mainLayout);
         progressBar = findViewById(R.id.loading_spinner);
     }
 
-    public void registerNetworkMonitoring() {
+    private void registerNetworkMonitoring() {
         IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
         NetworkChangeReceiver receiver = new NetworkChangeReceiver(main);
         this.registerReceiver(receiver, filter);
     }
 
-    public void setOnRefresh() {
+    public void initOnRefresh() {
+        SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
             connectAndGetApiData();
             pullToRefresh.setRefreshing(false);

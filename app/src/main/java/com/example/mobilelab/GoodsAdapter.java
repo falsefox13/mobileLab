@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,41 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder> {
     private List<Good> goods;
     private int rowLayout;
-    private Context context;
-    private static final String BASE_URL = "http://bowling-iot.pp.ua";
 
-    GoodsAdapter(List<Good> goods, int rowLayout, Context context) {
+    public GoodsAdapter(List<Good> goods, int rowLayout) {
         this.goods = goods;
         this.rowLayout = rowLayout;
-        this.context = context;
-    }
-
-    static class GoodsViewHolder extends RecyclerView.ViewHolder {
-        RelativeLayout goodsLayout;
-        TextView title;
-        TextView place;
-        TextView date;
-        TextView price;
-        ImageView image;
-
-        GoodsViewHolder(View v) {
-            super(v);
-            goodsLayout = v.findViewById(R.id.goods_layout);
-            image = v.findViewById(R.id.good_image);
-            title = v.findViewById(R.id.title);
-            date = v.findViewById(R.id.date);
-            place = v.findViewById(R.id.description);
-            price = v.findViewById(R.id.price);
-        }
     }
 
     @NonNull
@@ -61,23 +34,42 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.GoodsViewHol
 
     @Override
     public void onBindViewHolder(GoodsViewHolder holder, final int position) {
-        String image_url = BASE_URL + goods.get(position).getImg();
+        Context context = holder.itemView.getContext();
         Picasso.with(context)
-                .load(image_url)
+                .load(goods.get(position).getImg())
                 .placeholder(R.drawable.default_img)
                 .error(R.drawable.default_img)
                 .into(holder.image);
         holder.title.setText(goods.get(position).getTitle());
-        holder.price.setText(String.format("%s$", goods.get(position).getPrice()));
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        int MILLISEC = 1000;
-        Date date = new Date(goods.get(position).getDate() * MILLISEC);
-        holder.date.setText(formatter.format(date));
+        holder.price.setText(goods.get(position).getPrice());
+        holder.date.setText(goods.get(position).getDate());
         holder.place.setText(context.getString(R.string.place, goods.get(position).getPlace()));
     }
 
     @Override
     public int getItemCount() {
         return goods.size();
+    }
+
+    public void updateGoods(final List<Good> goods) {
+        this.goods = goods;
+        notifyDataSetChanged();
+    }
+
+    public static class GoodsViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+        private TextView place;
+        private TextView date;
+        private TextView price;
+        private ImageView image;
+
+        GoodsViewHolder(View v) {
+            super(v);
+            image = v.findViewById(R.id.good_image);
+            title = v.findViewById(R.id.title);
+            date = v.findViewById(R.id.date);
+            place = v.findViewById(R.id.description);
+            price = v.findViewById(R.id.price);
+        }
     }
 }
