@@ -76,18 +76,18 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate(final String email, final String password) {
         boolean valid = true;
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (Utils.validateEmail(email)) {
+            emailField.setError(null);
+        } else {
             emailField.setError(getString(R.string.email_error));
             valid = false;
-        } else {
-            emailField.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 8) {
+        if (Utils.validatePassword(password)) {
+            passField.setError(null);
+        } else {
             passField.setError(getString(R.string.password_error));
             valid = false;
-        } else {
-            passField.setError(null);
         }
 
         return valid;
