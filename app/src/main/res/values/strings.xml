@@ -10,6 +10,7 @@
     <string name="logo">Logo</string>
     <string name="create_account">Create Account</string>
     <string name="welcome">Welcome!</string>
+    <string name="hello">Hello World! I\'m blank fragment</string>
     <string name="sign_out">Sign Out</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="load_failed">Can\'t fetch data from server</string>
@@ -24,4 +25,27 @@
     <string name="dollars">\$</string>
     <string name="place">Place of purchase: %1$s</string>
     <string name="image">image</string>
+    <string name="title">Title: </string>
+    <string name="place_holder">Place of purchase: </string>
+    <string name="description">Description: </string>
+    <string name="price">Price: </string>
+    <string name="date">Date: </string>
+    <string name="profile">Profile</string>
+    <string name="goods">Goods</string>
+    <string name="blank">Blank</string>
+    <string name="enter_new_email">Enter new email:</string>
+    <string name="enter_new_name">Enter new name:</string>
+    <string name="profile_image">Profile image</string>
+    <string name="upload_new">Upload</string>
+    <string name="save">Save</string>
+    <string name="username">Username</string>
+    <string name="upload_progress">Upload in progress</string>
+    <string name="uploading">Uploading</string>
+    <string name="image_success">Image updated</string>
+    <string name="email_success">User email address updated.</string>
+    <string name="fail">FAILED.</string>
+    <string name="confirm_title">Confirm password:</string>
+    <string name="confirm">Confirm</string>
+    <string name="name_success">Name updated</string>
+    <string name="details">Good\'s details</string>
 </resources>
