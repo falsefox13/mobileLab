@@ -1,5 +1,7 @@
 package com.example.mobilelab;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,27 +29,29 @@ import retrofit2.Response;
 import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
 
 public class ListFragment extends Fragment {
-
     private RelativeLayout main;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.activity_main, container, false);
-        initFields();
-        initOnRefresh();
-        registerNetworkMonitoring();
-        connectAndGetApiData();
-        return rootView;
+        return inflater.inflate(R.layout.activity_main, container, false);
     }
 
-    private void initFields() {
-        main = rootView.findViewById(R.id.mainLayout);
-        progressBar = rootView.findViewById(R.id.loading_spinner);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initFields(view);
+        initOnRefresh(view);
+        registerNetworkMonitoring();
+        connectAndGetApiData();
+    }
+
+    private void initFields(final View view) {
+        main = view.findViewById(R.id.mainLayout);
+        progressBar = view.findViewById(R.id.loading_spinner);
+        recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration itemDecor = new DividerItemDecoration(Objects.requireNonNull(getActivity()), VERTICAL);
@@ -55,8 +59,8 @@ public class ListFragment extends Fragment {
         recyclerView.setAdapter(new GoodsAdapter(main.getContext(), new ArrayList<>(), R.layout.list_item_good));
     }
 
-    private void initOnRefresh() {
-        final SwipeRefreshLayout pullToRefresh = rootView.findViewById(R.id.pullToRefresh);
+    private void initOnRefresh(final View view) {
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
             connectAndGetApiData();
             pullToRefresh.setRefreshing(false);
@@ -70,7 +74,7 @@ public class ListFragment extends Fragment {
     }
 
     public void connectAndGetApiData() {
-        final GoodsService service = ((App) getApplicationEx()).getApiService();
+        final GoodsService service = (getApplicationEx()).getApiService();
         Call<List<Good>> call = service.listGoods();
         progressBar.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<List<Good>>() {

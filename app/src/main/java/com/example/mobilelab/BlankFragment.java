@@ -7,10 +7,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 public class BlankFragment extends Fragment {
-
-    public BlankFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

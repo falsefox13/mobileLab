@@ -38,6 +38,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
+    private static final int IMAGE_REQUEST = 1;
     private FloatingActionButton uploadImgButton;
     private ImageView profileImage;
     private Button newEmailButton;
@@ -48,12 +49,8 @@ public class ProfileFragment extends Fragment {
     private TextView email;
     private FirebaseUser fuser;
     private StorageReference storageReference;
-    private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageTask<UploadTask.TaskSnapshot> uploadTask;
-
-    public ProfileFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,6 +104,7 @@ public class ProfileFragment extends Fragment {
     private void updateEmail() {
         final String email = newEmail.getText().toString();
         if (fuser != null && Utils.validateEmail(email)) {
+            newEmail.setError(null);
             fuser.updateEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), R.string.email_success, Toast.LENGTH_SHORT).show();
@@ -115,6 +113,8 @@ public class ProfileFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.fail, Toast.LENGTH_SHORT).show();
                 }
             });
+        } else {
+            newEmail.setError(getString(R.string.email_error));
         }
     }
 
@@ -135,6 +135,7 @@ public class ProfileFragment extends Fragment {
     private void updateName() {
         final String name = newName.getText().toString();
         if (Utils.validateName(name)) {
+            newName.setError(null);
             final UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name).build();
             fuser.updateProfile(profileUpdates)
@@ -144,6 +145,8 @@ public class ProfileFragment extends Fragment {
                             newName.getText().clear();
                         }
                     });
+        } else {
+            newName.setError(getString(R.string.name_error));
         }
     }
 
@@ -201,10 +204,10 @@ public class ProfileFragment extends Fragment {
                 if (task.isSuccessful()) {
                     updatePhoto(task.getResult());
                     pd.dismiss();
+                } else {
+                    Toast.makeText(getContext(), R.string.fail, Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 }
-            }).addOnFailureListener(e -> {
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                pd.dismiss();
             });
         }
     }
