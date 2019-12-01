@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bowlingsite",
+  "private_key_id": "99d773d3b104e876cced8dca8094cefdba23f653",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDKm1B9ZSffUZUP\nYXPZx7OjrwDQd9R2ZhUt98bV308Lv6gYyYc5YIo+qsnRPvjgGW2BgjkdDBylsXvO\nGpZgyJAfoT51YVx+a0d8YpK9+2BFPmqSNyOIMgFDweo9B1AzNPR3pWdK9ifeWR9q\nbDf3y9UiyC6mngM30QPA0dBNH4pJk/rWTiaSdOPPra6M70vaE8TF6yUERlOj68b5\nAeXezf+c5vrUg1myIMWkG5caehYp4Y+AhraWjw0nwqP219AHRpfU3YIWCwyDZr2/\nKZMx0pA6TljO5bE4uasHKcD/A+/opMPzRWK2VSiYWI5jKfZEKF14Bsh7mgEJxHXS\n8JpVZT9tAgMBAAECggEAF4YdfBW24a+1/CVvP1G3ypE66bmEDmQvYNk0OahWI/HS\niWA6xl9uZbTMPnKOkGx7Ya5WRcheeiGHk6hUHfQjgbylxRizFc2MbQV/7rWFWbzT\nwFrNEhbmPTECaqgS+IMVQGAQxGwcuG0GIAPlIq0Et+dgvUE68+vdgPGLeyzmkEC8\niWjBuUHo4f9qMuRH12bgE+2XyXtRINEF/TG3iQYhLk9WHU+HkJCTQzkjv32drQTL\nHJnJ4/XNsTaEaHWB1LtDFFzBvClnRpjjgdak/Kv6USBGjNWaJRCcXxOi1zLchV5y\n+mt3xwRfz5B1jV0rFWOJinQDVcsnMmOCvOvOW4uoSQKBgQDwAxWcc4rJ7ThGAWmY\nXw+rbhyrC8XpcC5Uf7O3c+DK1T2kiS0K53fBt0G29o9z0Tpinp6FkHqKmlw6Voc2\nUyC27hAfEzm8PDwowi/z350VjdI8ARtHgG03/R5ilMZcn3/po3VPkn7632zRe033\nqdSkQ0q9B2EZTHdIaVMnKCoH6QKBgQDYGluqwz2QuWDr4ut0qZRUDp5InRBrz//d\nkeIerm0ej4KiD/gAYgIVUS/eYu9Y1vNsYz5Ts5sE3nTZkzJjLUCOOjwUBxxkAFd7\n24DbeRoI+zT57/VtNGzd5peymJPLrk9s0NYmLr2IRFAIcNbBoYOkai74Beoyd9is\nx6NYTPtM5QKBgDeuP4FAPN6Drh5vjXPP+e6naPc1kACMCfOIfMT+mRP1TIuzV0PE\nV0AVp6UupjEURRtD+Tq7PfKRxPuzv0KXHmvR5uOOrkJBJyO9iSpmoiax9Cf/ibiY\nzr3Cdx4frbUnO6GUTk7biaHh23jtxjTCrZY+FkSsRZZ86t9dr/DRnI6hAoGARN3Z\neoivlPBOn7131Xy5JTRnYrKS6hil7GEyEx747TVEpwq5uL2C9nIh9BfJOKF/f3n9\nAcWJ0DpoOHH9K7ffC7QpMyS0+nVVa8YewVJNZrFPR5sdtkhvrSNwEl0nNFB/RSkk\nJZTdl5BVhOsYtSoYfovMHgQchyrEJQOV3Wzi5LUCgYEAnDHI0xsfCSddOnqFwnP0\nb6Trq0HV+fi2CHtGnaIspDx2oLzf7AL29ZECS9DDc0qSMy1nFAg/wnfVpFjCBMBw\ngDnX9seZHY7suw817GSx+g6YygrwTqKSyNvZ4St/18a5GRvlawJIh9VzQWlgnEl7\nWUW8Nprk+tMbz5IkjcvFjKs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bowlingsite@appspot.gserviceaccount.com",
+  "client_id": "116677193359201066626",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bowlingsite%40appspot.gserviceaccount.com"
+}

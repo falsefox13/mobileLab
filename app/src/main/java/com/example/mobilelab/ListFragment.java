@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,6 +58,9 @@ public class ListFragment extends Fragment {
         DividerItemDecoration itemDecor = new DividerItemDecoration(Objects.requireNonNull(getActivity()), VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
         recyclerView.setAdapter(new GoodsAdapter(main.getContext(), new ArrayList<>(), R.layout.list_item_good));
+        view.findViewById(R.id.new_item_button).setOnClickListener(v -> {
+            startActivity(new Intent(view.getContext(), NewItemActivity.class));
+        });
     }
 
     private void initOnRefresh(final View view) {

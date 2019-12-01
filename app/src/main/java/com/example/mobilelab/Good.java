@@ -3,9 +3,11 @@ package com.example.mobilelab;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Good {
 
@@ -28,6 +30,20 @@ public class Good {
         this.date = date;
     }
 
+    public Good(String title, String place, String date, String price, String img) {
+        this.title = title;
+        this.place = place;
+        this.price = Float.parseFloat(price);
+        this.img = img;
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        try {
+            Date d = f.parse(date);
+            this.date = Objects.requireNonNull(d).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getTitle() {
         return title;
     }
@@ -41,7 +57,7 @@ public class Good {
     }
 
     public String getImg() {
-        return String.format("%s%s", "http://bowling-iot.pp.ua", img);
+        return img;
     }
 
     public String getDate() {

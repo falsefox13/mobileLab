@@ -9,11 +9,13 @@
     <string name="phone">Phone</string>
     <string name="logo">Logo</string>
     <string name="create_account">Create Account</string>
+    <string name="create_item">Create Item</string>
     <string name="welcome">Welcome!</string>
     <string name="hello">Hello World! I\'m blank fragment</string>
     <string name="sign_out">Sign Out</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="load_failed">Can\'t fetch data from server</string>
+    <string name="post_failed">Can\'t post data to server</string>
     <string name="no_internet">No internet connection</string>
     <string name="check">Please check your email and password</string>
     <string name="email_error">Enter a valid email</string>
@@ -25,7 +27,7 @@
     <string name="dollars">\$</string>
     <string name="place">Place of purchase: %1$s</string>
     <string name="image">image</string>
-    <string name="title">Title: </string>
+    <string name="title">Title:  </string>
     <string name="place_holder">Place of purchase: </string>
     <string name="description">Description: </string>
     <string name="price">Price: </string>
@@ -48,4 +50,11 @@
     <string name="confirm">Confirm</string>
     <string name="name_success">Name updated</string>
     <string name="details">Good\'s details</string>
+    <string name="new_item">Add new good</string>
+    <string name="item_image">Image of the item</string>
+    <string name="title_error">Please provide a valid title</string>
+    <string name="place_error">Please type in a valid place</string>
+    <string name="date_error">This does not look like a date</string>
+    <string name="price_error">Please fill in a valid price</string>
+    <string name="date_format">%d/%d/%d</string>
 </resources>

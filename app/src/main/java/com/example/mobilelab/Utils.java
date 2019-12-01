@@ -1,5 +1,7 @@
 package com.example.mobilelab;
 
+import android.text.TextUtils;
+
 class Utils {
     static boolean validateEmail(String email) {
         return !email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -13,8 +15,11 @@ class Utils {
         return !phone.isEmpty() && !android.util.Patterns.PHONE.matcher(phone).matches();
     }
 
-    static boolean validateName(String name) {
-        return name.matches("^[A-Za-z]+$");
+    static boolean validateString(String name) {
+        return name.matches("^[A-Za-z\\s*]+");
     }
 
+    static boolean validatePrice(String price) {
+        return !price.isEmpty() && TextUtils.isDigitsOnly(price);
+    }
 }
