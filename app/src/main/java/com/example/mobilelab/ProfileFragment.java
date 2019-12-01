@@ -104,18 +104,23 @@ public class ProfileFragment extends Fragment {
     private void updateEmail() {
         final String email = newEmail.getText().toString();
         if (fuser != null && Utils.validateEmail(email)) {
-            newEmail.setError(null);
-            fuser.updateEmail(email).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), R.string.email_success, Toast.LENGTH_SHORT).show();
-                    newEmail.getText().clear();
-                } else {
-                    Toast.makeText(getContext(), R.string.fail, Toast.LENGTH_SHORT).show();
-                }
-            });
+            performEmailUpdate(email);
         } else {
             newEmail.setError(getString(R.string.email_error));
         }
+    }
+
+    private void performEmailUpdate(String email) {
+        newEmail.setError(null);
+        this.email.setText(email);
+        fuser.updateEmail(email).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(getContext(), R.string.email_success, Toast.LENGTH_SHORT).show();
+                newEmail.getText().clear();
+            } else {
+                Toast.makeText(getContext(), R.string.fail, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showEmailUpdateDialog() {
@@ -135,19 +140,23 @@ public class ProfileFragment extends Fragment {
     private void updateName() {
         final String name = newName.getText().toString();
         if (Utils.validateName(name)) {
-            newName.setError(null);
-            final UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(name).build();
-            fuser.updateProfile(profileUpdates)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), R.string.name_success, Toast.LENGTH_SHORT).show();
-                            newName.getText().clear();
-                        }
-                    });
+            performNameUpdate(name);
         } else {
             newName.setError(getString(R.string.name_error));
         }
+    }
+
+    private void performNameUpdate(String name) {
+        newName.setError(null);
+        final UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        fuser.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), R.string.name_success, Toast.LENGTH_SHORT).show();
+                        newName.getText().clear();
+                    }
+                });
     }
 
     private void showProfileImage(final String photoUrl) {
@@ -188,9 +197,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void uploadImage() {
-        final ProgressDialog pd = new ProgressDialog(getContext());
-        pd.setMessage(getString(R.string.uploading));
-        pd.show();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getString(R.string.uploading));
+        progressDialog.show();
         if (imageUri != null) {
             final StorageReference fileReference = storageReference.child(fuser.getUid()
                     + "." + getFileExtension(imageUri));
@@ -203,10 +212,10 @@ public class ProfileFragment extends Fragment {
             }).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     updatePhoto(task.getResult());
-                    pd.dismiss();
+                    progressDialog.dismiss();
                 } else {
                     Toast.makeText(getContext(), R.string.fail, Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
+                    progressDialog.dismiss();
                 }
             });
         }
