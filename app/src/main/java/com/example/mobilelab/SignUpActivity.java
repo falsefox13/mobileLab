@@ -111,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
             valid = false;
         }
 
-        if (Utils.validateName(name)) {
+        if (Utils.validateString(name)) {
             nameField.setError(null);
         } else {
             nameField.setError(getString(R.string.name_error));

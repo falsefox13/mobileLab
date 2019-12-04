@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +140,7 @@ public class ProfileFragment extends Fragment {
 
     private void updateName() {
         final String name = newName.getText().toString();
-        if (Utils.validateName(name)) {
+        if (Utils.validateString(name)) {
             performNameUpdate(name);
         } else {
             newName.setError(getString(R.string.name_error));
@@ -150,6 +151,7 @@ public class ProfileFragment extends Fragment {
         newName.setError(null);
         final UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name).build();
+        this.name.setText(name);
         fuser.updateProfile(profileUpdates)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
