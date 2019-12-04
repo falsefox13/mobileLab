@@ -61,10 +61,10 @@ public class NewItemActivity extends AppCompatActivity {
         placeField = findViewById(R.id.place_wrapper);
         dateField = findViewById(R.id.date_wrapper);
         progressBar = findViewById(R.id.progress_bar);
+        priceField = findViewById(R.id.price_wrapper);
         findViewById(R.id.new_image_button).setOnClickListener(v -> openImage());
         initButton();
         initDatePicker();
-        priceField = findViewById(R.id.price_wrapper);
     }
 
     private void initButton() {
@@ -114,7 +114,6 @@ public class NewItemActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.item_view), R.string.post_failed, Snackbar.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void openImage() {
@@ -136,10 +135,7 @@ public class NewItemActivity extends AppCompatActivity {
         final int TARGET_WIDTH = 200;
         final int TARGET_HEIGHT = 200;
         if (!photoUrl.isEmpty()) {
-            Picasso.get()
-                    .load(photoUrl)
-                    .resize(TARGET_WIDTH, TARGET_HEIGHT)
-                    .into((ImageView) findViewById(R.id.item_image));
+            Picasso.get().load(photoUrl).resize(TARGET_WIDTH, TARGET_HEIGHT).into((ImageView) findViewById(R.id.item_image));
         }
     }
 
@@ -211,7 +207,8 @@ public class NewItemActivity extends AppCompatActivity {
                         .setCredentials(credentials)
                         .build()
                         .getService();
-                final Bucket bucket = storage.get("www.bowling-iot.pp.ua");
+                final String bucketName = "www.bowling-iot.pp.ua";
+                final Bucket bucket = storage.get(bucketName);
                 final String imgPath = "img/" + blobName[0].getLastPathSegment() + "." + getFileExtension(blobName[0]);
                 final BlobId blobId = BlobId.of(bucket.getName(), imgPath);
                 final InputStream imageStream = getContentResolver().openInputStream(blobName[0]);

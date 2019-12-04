@@ -35,10 +35,11 @@ public class Good {
         this.place = place;
         this.price = Float.parseFloat(price);
         this.img = img;
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        final String pattern = "dd/MM/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
         try {
-            Date d = f.parse(date);
-            this.date = Objects.requireNonNull(d).getTime();
+            Date parsedDate = format.parse(date);
+            this.date = Objects.requireNonNull(parsedDate).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
